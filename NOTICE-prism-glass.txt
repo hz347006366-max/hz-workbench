@@ -1,0 +1,3 @@
+Copyright 2026 csuyincs-creator (清晨方白晓)
+Licensed under the Apache License, Version 2.0.
+Brand assets in docs/brand are excluded from the Apache grant.

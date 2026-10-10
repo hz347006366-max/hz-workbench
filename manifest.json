@@ -1,0 +1,9 @@
+{
+  "id": "hz-workbench",
+  "name": "HZ 个人工作台",
+  "version": "0.4.0",
+  "minAppVersion": "1.5.0",
+  "description": "Manage your daily journal, tasks, and projects from a draggable dashboard for PARA vaults.",
+  "author": "瀚中",
+  "isDesktopOnly": false
+}
