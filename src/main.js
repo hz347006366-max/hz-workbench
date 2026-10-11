@@ -663,12 +663,19 @@ class WorkbenchView extends ItemView {
   renderSidebar(app) {
     const sidebar = this.el(app, 'aside', 'hz-sidebar');
     const brand = this.el(sidebar, 'div', 'hz-brand');
-    const pluginDir = this.plugin.manifest.dir || `.obsidian/plugins/${this.plugin.manifest.id}`;
-    const logoPath = normalizePath(`${pluginDir}/logo.png`);
     const logo = this.el(brand, 'img', 'hz-brand-logo');
-    logo.src = this.app.vault.adapter.getResourcePath(logoPath);
     logo.alt = 'HZ';
+    logo.src = this.logoUrl();
+    logo.addEventListener('error', () => { logo.remove(); });
     return sidebar;
+  }
+
+  logoUrl() {
+    // 优先用 Obsidian 运行时注入的插件目录；社区市场移动端安装后 dir 通常有效。
+    // 若解析失败（logo.png 未打包进 Release 附件），getResourcePath 会返回一个打不开的
+    // 地址，交由调用方的 onerror 兜底隐藏，避免显示破图。
+    const dir = this.plugin.manifest.dir || `.obsidian/plugins/${this.plugin.manifest.id}`;
+    return this.app.vault.adapter.getResourcePath(normalizePath(`${dir}/logo.png`));
   }
 
   renderReservedRail(parent) {
@@ -760,10 +767,10 @@ class WorkbenchView extends ItemView {
   renderHeader(shell) {
     const header = this.el(shell, 'header', 'hz-header');
     const hello = this.el(header, 'div', 'hz-hello');
-    const pluginDir = this.plugin.manifest.dir || `.obsidian/plugins/${this.plugin.manifest.id}`;
     const logo = this.el(hello, 'img', 'hz-header-logo');
-    logo.src = this.app.vault.adapter.getResourcePath(normalizePath(`${pluginDir}/logo.png`));
     logo.alt = 'HZ';
+    logo.src = this.logoUrl();
+    logo.addEventListener('error', () => { logo.remove(); });
     const now = new Date();
     this.el(hello, 'small', '', `${dateKey(now)} · ${new Intl.DateTimeFormat('zh-CN', { weekday: 'long' }).format(now)} · ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`);
     const hour = now.getHours();

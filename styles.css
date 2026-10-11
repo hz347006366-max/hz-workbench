@@ -321,6 +321,18 @@
 .hz-app [data-scroll-to]:active{transform:scale(.97);transition:transform .12s ease}
 .hz-app{-webkit-tap-highlight-color:transparent}
 .hz-app .hz-layout-label,.hz-app .hz-resize-handle,.hz-app .hz-snap-guide,.hz-app .hz-layout-toolbar,.hz-app .hz-conflict-stripes{display:none!important}
+/* 移动端宽度/高度收敛：消除桌面固定尺寸导致的横向溢出与内容裁切 */
+.hz-app .hz-shell{width:100%;min-width:0;max-width:100%;overflow:visible;height:auto}
+.hz-app .hz-shell>*{min-width:0}
+.hz-app .hz-left,.hz-app .hz-right{width:100%;min-width:0}
+.hz-app .hz-journal,.hz-app .hz-projects,.hz-app .hz-must,.hz-app .hz-tasks{width:100%;min-width:0}
+.hz-app .hz-header{width:100%;min-width:0}
+.hz-app .hz-hello{min-width:0;overflow:hidden}
+.hz-app .hz-right{height:auto;min-height:0}
+.hz-app .hz-journal{height:auto;min-height:360px;max-height:none}
+.hz-app .hz-projects{height:auto;min-height:280px;max-height:none}
+.hz-app .hz-must,.hz-app .hz-tasks{height:auto}
+.hz-app .hz-header-logo{flex:none}
 }
 .hz-month-block{display:flex;flex-direction:column;gap:10px;min-width:0;padding:12px 14px;border:1px solid var(--background-modifier-border);border-radius:var(--radius-s);background:var(--background-secondary);color:var(--text-normal);font-size:var(--font-ui-smaller)}
 .hz-month-task-summary,.hz-month-finance-summary{font-weight:600;overflow-wrap:anywhere}
